@@ -1,0 +1,12 @@
+{
+  "name": "y",
+  "version": "0.0.1",
+  "description": "Simulator of Deterministic Finite Automata",
+  "main": "index.html",
+  "repository": "https://github.com/jakubbegera/DFASimulator",
+  "author": "Jakub Begera (jakub@begera.cz)",
+  "license": "MIT",
+  "dependencies": {
+    "webpack": "^2.6.1"
+  }
+}
