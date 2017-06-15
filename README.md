@@ -1,2 +1,2 @@
 # DFASimulator
-Simulator of Deterministic Finite Automata
+Simulator of Deterministic Finite Automaton

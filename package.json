@@ -1,7 +1,7 @@
 {
   "name": "y",
   "version": "0.0.1",
-  "description": "Simulator of Deterministic Finite Automata",
+  "description": "Simulator of Deterministic Finite Automaton",
   "main": "index.html",
   "repository": "https://github.com/jakubbegera/DFASimulator",
   "author": "Jakub Begera (jakub@begera.cz)",

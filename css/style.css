@@ -2,10 +2,19 @@ body {
     font-family: 'Source Code Pro', monospace;
 }
 
+h4 {
+    margin-bottom: 5px;
+}
+
 #header {
     top: 15px;
     padding: 10px;
     text-align: center;
+}
+
+.graphDesignerControl {
+    margin-top: 0;
+    margin-bottom: 5px;
 }
 
 button {
@@ -29,14 +38,20 @@ button:hover {
     color: white;
 }
 
+#btnStart {
+    border: 1px solid #00b400;
+    background-color: #00b400;
+    color: white;
+}
+
 #btnConfirmNewEdge {
-    border: 1px solid #0d0;
-    background-color: #0d0;
+    border: 1px solid #00b400;
+    background-color: #00b400;
     color: white;
 }
 
 
-#graphControl {
+#graphDesigner, #simulator {
     text-align: center;
     margin-bottom: 3px;
 }
@@ -56,4 +71,18 @@ button:hover {
 #btnDiscardAddingEdge {
     color: #b00;
     border: 0px solid;
+}
+
+#currentState {
+    color: #b00;
+}
+
+#errorText {
+    color: #b00;
+    margin: 5px;
+}
+
+#wordProgress {
+    color: gray;
+    size: 15px;
 }

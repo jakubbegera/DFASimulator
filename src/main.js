@@ -170,6 +170,34 @@ function findAllPossibleNewEdgesFromNode(nodeId) {
 }
 
 //**********************************************************************************************************************
+// simulation
+//**********************************************************************************************************************
+document.querySelector("#btnStart").addEventListener('click', (e) => {
+    let word;
+    if ((word = checkInputWord()) === null) {
+        $('#errorText').css("display", "inline");
+        $('#simulatorState').css("display", "none");
+        return;
+    }
+    $('#errorText').css("display", "none");
+    $('#simulatorState').css("display", "block");
+});
+
+function checkInputWord() {
+    let text = $('#inputWord').val();
+    console.log(text);
+    if (text.length === 0) return null;
+
+    for (let i = 0; i < text.length; i++) {
+        if (alphabet.indexOf(text[i]) === -1) {
+            return null;
+        }
+    }
+
+    return text;
+}
+
+//**********************************************************************************************************************
 // others
 //**********************************************************************************************************************
 function displayAlphabet() {
@@ -181,7 +209,7 @@ function displayAlphabet() {
         alp = alp + alphabet[i];
         console.log(alp);
     }
-    $('#automataAlphabet').text(alp);
+    $('#automatonAlphabet').text(alp);
 }
 
 $(window).keypress(function (e) {

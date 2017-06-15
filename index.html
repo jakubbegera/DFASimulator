@@ -9,32 +9,51 @@
 </head>
 <body>
 <header id="header">
-            <span>
-                Simulator of Deterministic Finite Automata<br><br>
-                Automata alphabet &Sigma; = {<span id="automataAlphabet"></span>}
-            </span>
+    <h3>Simulator of Deterministic Finite Automaton</h3>
+    <span>
+            Automaton alphabet &Sigma; = {<span id="automatonAlphabet"></span>}
+    </span>
 </header>
 
-<br>
-<br>
-<section id="graphControl">
-    <span>Add node:
+<section id="graphDesigner">
+
+    <h4>Design you automaton here</h4>
+    <span class="graphDesignerControl">
+        Add node:
         <button id="btnAddNodeRegular" class="btn btn-default btn-sm">Regular</button>
         <button id="btnAddNodeTerminate" class="btn btn-danger btn-sm">Terminate</button>
         <button id="btnClear" class="btn btn-warning btn-sm">Clear all</button>
     </span>
     <br>
-    <span>
+    <span class="graphDesignerControl">
         Add edge:
         <span id="lblAddEdge"></span>
         <select id="charSelect" style="display: none"></select>
-        <button id="btnConfirmNewEdge" style="display: none" >Add</button>
-        <button id="btnDiscardAddingEdge" style="display: none" >(discard)</button>
+        <button id="btnConfirmNewEdge" style="display: none">Add</button>
+        <button id="btnDiscardAddingEdge" style="display: none">(discard)</button>
     </span>
 </section>
 
 <div id="cy"></div>
 
+<section id="simulator">
+    <h4>Simulate automaton steps</h4>
+
+    Word to simulate: <input id="inputWord" type="text" name="inputWord">
+    <button id="btnStart">Start</button>
+    <br>
+    <span id="errorText" style="display: none">
+        Entered word isn't valid. Is is empty or it isn't a subset of &Sigma;.</span>
+
+    <div id="simulatorState" style="display: none">
+        Current state: <span id="currentState">q<sub>0</sub></span>
+        <br>
+        <span id="wordProgress">13245151</span>
+    </div>
+
+
+</section>
+<br>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.1.1/cytoscape.js"
         charset="utf-8"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
