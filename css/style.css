@@ -38,9 +38,15 @@ button:hover {
     color: white;
 }
 
-#btnStart {
+#btnSimulationStart {
     border: 1px solid #00b400;
     background-color: #00b400;
+    color: white;
+}
+
+#btnSimulationStop {
+    border: 1px solid #b00;
+    background-color: #b00;
     color: white;
 }
 
@@ -83,6 +89,22 @@ button:hover {
 }
 
 #wordProgress {
+    color: gray;
+    size: 15px;
+}
+
+.textDone {
+    color: #b00;
+    size: 15px;
+}
+
+.textCurrent {
+    color: #b00;
+    font-weight: bold;
+    size: 15px;
+}
+
+.textRemaining {
     color: gray;
     size: 15px;
 }

@@ -40,15 +40,19 @@
     <h4>Simulate automaton steps</h4>
 
     Word to simulate: <input id="inputWord" type="text" name="inputWord">
-    <button id="btnStart">Start</button>
+    <button id="btnSimulationStart">Start</button>
+    <button id="btnSimulationStop" style="display: none">Stop</button>
     <br>
     <span id="errorText" style="display: none">
         Entered word isn't valid. Is is empty or it isn't a subset of &Sigma;.</span>
+    <span id="successText" style="display: none">
+        DFA stopped successfully.
+    </span>
 
     <div id="simulatorState" style="display: none">
-        Current state: <span id="currentState">q<sub>0</sub></span>
+        Current state: <span id="currentState"></span>
         <br>
-        <span id="wordProgress">13245151</span>
+        <span id="wordProgress"></span>
     </div>
 
 

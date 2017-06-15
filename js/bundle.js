@@ -140,6 +140,11 @@ let edges = [];
 let newEdgeNode1 = -1;
 let newEdgeNode2 = -1;
 
+let isSimulationRunning = false;
+let simulationCurrentNode;
+let simulationStep = -1;
+let simulationWord;
+
 //**********************************************************************************************************************
 // init graph
 //**********************************************************************************************************************
@@ -299,16 +304,28 @@ function findAllPossibleNewEdgesFromNode(nodeId) {
 //**********************************************************************************************************************
 // simulation
 //**********************************************************************************************************************
-document.querySelector("#btnStart").addEventListener('click', (e) => {
-    let word;
-    if ((word = checkInputWord()) === null) {
-        $('#errorText').css("display", "inline");
+document.querySelector("#btnSimulationStart").addEventListener('click', (e) => {
+    stopSimulation();
+    let txvError = $('#errorText');
+    if ((simulationWord = checkInputWord()) === null) {
+        txvError.css("display", "inline");
+        txvError.html("Entered word isn't valid. Is is empty or it isn't a subset of &Sigma;")
         $('#simulatorState').css("display", "none");
         return;
     }
-    $('#errorText').css("display", "none");
+    isSimulationRunning = true;
+    txvError.css("display", "none");
     $('#simulatorState').css("display", "block");
+
+    $('#btnSimulationStart').css("display", "none");
+    $('#btnSimulationStop').css("display", "inline");
+
+    simulationCurrentNode = findNodeById(0);
+    simulationStep = 0;
+    updateSimulationProgress();
 });
+document.querySelector("#btnSimulationStop").addEventListener('click', (e) => stopSimulation());
+
 
 function checkInputWord() {
     let text = $('#inputWord').val();
@@ -320,8 +337,78 @@ function checkInputWord() {
             return null;
         }
     }
-
     return text;
+}
+
+function doSimulationStep() {
+    if (!isSimulationRunning) return;
+    let symbol = simulationWord[simulationStep];
+    let outEdges = findAllOutEdgesFromNode(simulationCurrentNode.id);
+    console.log("Found edges: " + outEdges + "(from node" + simulationCurrentNode.id + ")");
+    let selectedEdge = null;
+    for (let i = 0; i < outEdges.length; i++) {
+        if (outEdges[i].transitionChar === symbol) {
+            selectedEdge = outEdges[i];
+            break;
+        }
+    }
+
+    if (selectedEdge === null) {
+        console.log("Error - no out edge found");
+        let txvError = $('#errorText');
+        txvError.text("DFA simulation fail. No out edge found - did you forgot some transition?");
+        txvError.css("display", "inline");
+        stopSimulation();
+        return;
+    }
+
+    simulationStep++;
+    simulationCurrentNode = findNodeById(selectedEdge.nodeTo);
+    updateSimulationProgress();
+
+    if (simulationStep === simulationWord.length) { // last symbol?
+        if (simulationCurrentNode.type === __WEBPACK_IMPORTED_MODULE_0__Node__["c" /* NODE_TERMINATE */]) {
+            console.log("success");
+            $('#successText').css("display", "inline");
+        } else {
+            console.log("fail");
+        }
+        stopSimulation();
+    }
+}
+
+function updateSimulationProgress() {
+    let readChars = '';
+    let currentChar = '';
+    let remainingChars = '';
+    for (let i = 0; i < simulationWord.length; i++) {
+        if (i < simulationStep) {
+            readChars = readChars + simulationWord[i];
+        } else if (i == simulationStep) {
+            currentChar = simulationWord[i];
+        } else {
+            remainingChars = remainingChars + simulationWord[i];
+        }
+    }
+    $('#wordProgress').html(
+        "<span class='textDone'>" + readChars + "</span>" +
+        "<span class='textCurrent'>" + currentChar + "</span>" +
+        "<span class='textRemaining'>" + remainingChars + "</span>"
+    )
+    $('#currentState').html(
+        "q<sub>" + simulationCurrentNode.id + "</sub>"
+    );
+}
+
+function stopSimulation() {
+    $('#btnSimulationStart').css("display", "inline");
+    $('#btnSimulationStop').css("display", "none");
+    $('#successText').css("display", "none");
+
+    isSimulationRunning = false;
+    simulationCurrentNode = null;
+    simulationStep = -1;
+    simulationWord = null;
 }
 
 //**********************************************************************************************************************
@@ -341,10 +428,32 @@ function displayAlphabet() {
 
 $(window).keypress(function (e) {
     if (e.keyCode === 0 || e.keyCode === 32) { // space
-        addNode(__WEBPACK_IMPORTED_MODULE_0__Node__["b" /* NODE_NORMAL */]);
-        addEdge(nodes[nodes.length - 2].id, nodes[nodes.length - 1].id, '1');
+        // addNode(NODE_NORMAL);
+        // addEdge(nodes[nodes.length - 2].id, nodes[nodes.length - 1].id, '1');
+        doSimulationStep();
     }
 });
+
+function findNodeById(id) {
+    for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i].id == id) return nodes[i];
+    }
+    return null;
+}
+
+function findAllOutEdgesFromNode(id) {
+    let out = [];
+    console.log(edges);
+    for (let i = 0; i < edges.length; i++) {
+        console.log("id = " + id + ", edges[i].nodeFrom = " + edges[i].nodeFrom);
+        if (edges[i].nodeFrom == id) {
+            console.log("pushing");
+            out.push(edges[i]);
+        }
+    }
+    console.log(out);
+    return out;
+}
 
 /***/ })
 /******/ ]);
