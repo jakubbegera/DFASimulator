@@ -3,16 +3,19 @@ body {
 }
 
 #header {
-    position: fixed;
     top: 15px;
     padding: 10px;
     text-align: center;
 }
 
 @media (min-width: 500px) {
-    #header {
-        left: 50%;
-        width: 500px;
-        margin-left: -250px;
-    }
+
+}
+
+#cy {
+    width: 500px;
+    height: 500px;
+    border: 1px #ff976e solid;
+    margin-left: -250px;
+    left: 50%;
 }
