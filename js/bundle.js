@@ -371,8 +371,7 @@ function doSimulationStep() {
     updateSimulationProgress();
 
     if (audioEnable) {
-        let audio = new Audio();
-        audio.src = "assets/tick.mp3";
+        let audio = new Audio("assets/tick.mp3");
         audio.play();
     }
 
