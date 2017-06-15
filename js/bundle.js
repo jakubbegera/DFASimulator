@@ -158,7 +158,7 @@ var cy = cytoscape({
             'text-valign': 'center',
             'color': '#000',
             'background-color': '#eee',
-            'border-width': 1,
+            'border-width': 'data(borderWidth)',
             'border-color': 'data(color)',
             'font-family': 'Source Code Pro',
             'font-size': 10
@@ -219,7 +219,7 @@ function addNode(type) {
 
     cy.add({
         group: "nodes",
-        data: {id: nodeId, label: "q" + nodeId, color: color},
+        data: {id: nodeId, label: "q" + nodeId, color: color, borderWidth: 1},
         classes: 'center-center',
         position: {x: 200 + 10 * nodeId, y: 200 + 10 * nodeId}
     });
@@ -306,6 +306,7 @@ function findAllPossibleNewEdgesFromNode(nodeId) {
 //**********************************************************************************************************************
 document.querySelector("#btnSimulationStart").addEventListener('click', (e) => {
     stopSimulation();
+    $('#successText').css("display", "none");
     let txvError = $('#errorText');
     if ((simulationWord = checkInputWord()) === null) {
         txvError.css("display", "inline");
@@ -316,8 +317,8 @@ document.querySelector("#btnSimulationStart").addEventListener('click', (e) => {
     isSimulationRunning = true;
     txvError.css("display", "none");
     $('#simulatorState').css("display", "block");
-
     $('#btnSimulationStart').css("display", "none");
+    $('#btnSimulationNext').css("display", "inline");
     $('#btnSimulationStop').css("display", "inline");
 
     simulationCurrentNode = findNodeById(0);
@@ -325,6 +326,7 @@ document.querySelector("#btnSimulationStart").addEventListener('click', (e) => {
     updateSimulationProgress();
 });
 document.querySelector("#btnSimulationStop").addEventListener('click', (e) => stopSimulation());
+document.querySelector("#btnSimulationNext").addEventListener('click', (e) => doSimulationStep());
 
 
 function checkInputWord() {
@@ -372,6 +374,9 @@ function doSimulationStep() {
             $('#successText').css("display", "inline");
         } else {
             console.log("fail");
+            let txvError = $('#errorText');
+            txvError.css("display", "inline");
+            txvError.html("DFA stopped in q<sub>" + simulationCurrentNode.id + "</sub> which is not in subset of terminating nodes.");
         }
         stopSimulation();
     }
@@ -398,12 +403,23 @@ function updateSimulationProgress() {
     $('#currentState').html(
         "q<sub>" + simulationCurrentNode.id + "</sub>"
     );
+
+    let n = cy.elements('node');
+    cy.batch(function () {
+        for (let i = 0; i < n.length; i++) {
+            let bw = 1;
+            if (n[i].data('id') == simulationCurrentNode.id) {
+                bw = 4;
+            }
+            n[i].data('borderWidth', bw);
+        }
+    });
 }
 
 function stopSimulation() {
     $('#btnSimulationStart').css("display", "inline");
+    $('#btnSimulationNext').css("display", "none");
     $('#btnSimulationStop').css("display", "none");
-    $('#successText').css("display", "none");
 
     isSimulationRunning = false;
     simulationCurrentNode = null;
@@ -428,8 +444,6 @@ function displayAlphabet() {
 
 $(window).keypress(function (e) {
     if (e.keyCode === 0 || e.keyCode === 32) { // space
-        // addNode(NODE_NORMAL);
-        // addEdge(nodes[nodes.length - 2].id, nodes[nodes.length - 1].id, '1');
         doSimulationStep();
     }
 });

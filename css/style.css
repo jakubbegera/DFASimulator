@@ -44,6 +44,12 @@ button:hover {
     color: white;
 }
 
+#btnSimulationNext {
+    border: 1px solid #1656d4;
+    background-color: #1656d4;
+    color: white;
+}
+
 #btnSimulationStop {
     border: 1px solid #b00;
     background-color: #b00;
@@ -55,7 +61,6 @@ button:hover {
     background-color: #00b400;
     color: white;
 }
-
 
 #graphDesigner, #simulator {
     text-align: center;
@@ -76,7 +81,7 @@ button:hover {
 
 #btnDiscardAddingEdge {
     color: #b00;
-    border: 0px solid;
+    border: 0 solid;
 }
 
 #currentState {
@@ -85,6 +90,11 @@ button:hover {
 
 #errorText {
     color: #b00;
+    margin: 5px;
+}
+
+#successText {
+    color: #00b400;
     margin: 5px;
 }
 

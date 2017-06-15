@@ -4,8 +4,8 @@
     <title>DFASimulator</title>
     <meta charset="utf-8">
 
-    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet" media="all" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 </head>
 <body>
 <header id="header">
@@ -39,15 +39,17 @@
 <section id="simulator">
     <h4>Simulate automaton steps</h4>
 
+    <span id="successText" style="display: none">
+        DFA stopped successfully!
+    </span>
+
     Word to simulate: <input id="inputWord" type="text" name="inputWord">
     <button id="btnSimulationStart">Start</button>
+    <button id="btnSimulationNext" style="display: none">Next state</button>
     <button id="btnSimulationStop" style="display: none">Stop</button>
     <br>
     <span id="errorText" style="display: none">
         Entered word isn't valid. Is is empty or it isn't a subset of &Sigma;.</span>
-    <span id="successText" style="display: none">
-        DFA stopped successfully.
-    </span>
 
     <div id="simulatorState" style="display: none">
         Current state: <span id="currentState"></span>
