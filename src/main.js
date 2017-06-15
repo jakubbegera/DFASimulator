@@ -18,6 +18,8 @@ let simulationCurrentNode;
 let simulationStep = -1;
 let simulationWord;
 
+let audioEnable = true;
+
 //**********************************************************************************************************************
 // init graph
 //**********************************************************************************************************************
@@ -240,6 +242,11 @@ function doSimulationStep() {
     simulationStep++;
     simulationCurrentNode = findNodeById(selectedEdge.nodeTo);
     updateSimulationProgress();
+
+    if (audioEnable) {
+        let audio = new Audio("assets/tick.mp3");
+        audio.play();
+    }
 
     if (simulationStep === simulationWord.length) { // last symbol?
         if (simulationCurrentNode.type === NODE_TERMINATE) {
