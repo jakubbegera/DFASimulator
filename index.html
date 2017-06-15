@@ -3,18 +3,43 @@
 <head>
     <title>DFASimulator</title>
     <meta charset="utf-8">
+
     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet" media="all" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" media="all" type="text/css"/>
 </head>
 <body>
-    <header id="header">
-            Simulator of Deterministic Finite Automata
-    </header>
+<header id="header">
+            <span>
+                Simulator of Deterministic Finite Automata<br><br>
+                Automata alphabet &Sigma; = {<span id="automataAlphabet"></span>}
+            </span>
+</header>
 
-    <div id="cy"></div>
+<br>
+<br>
+<section id="graphControl">
+    <span>Add node:
+        <button id="btnAddNodeRegular" class="btn btn-default btn-sm">Regular</button>
+        <button id="btnAddNodeTerminate" class="btn btn-danger btn-sm">Terminate</button>
+        <button id="btnClear" class="btn btn-warning btn-sm">Clear all</button>
+    </span>
+    <br>
+    <span>
+        Add edge:
+        <span id="lblAddEdge"></span>
+        <select id="charSelect" style="display: none"></select>
+        <button id="btnConfirmNewEdge" style="display: none" >Add</button>
+        <button id="btnDiscardAddingEdge" style="display: none" >(discard)</button>
+    </span>
+</section>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.1.1/cytoscape.js" charset="utf-8"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/bundle.js" charset="utf-8"></script>
+<div id="cy"></div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.1.1/cytoscape.js"
+        charset="utf-8"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+        charset="utf-8"></script>
+
+<script type="text/javascript" src="js/bundle.js" charset="utf-8"></script>
 </body>
 </html>
