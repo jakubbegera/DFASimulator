@@ -469,5 +469,13 @@ function findAllOutEdgesFromNode(id) {
     return out;
 }
 
+// Just for fun
+window.addEventListener("offline", (e) => {
+    console.log("Offline :-(")
+});
+window.addEventListener("fline", (e) => {
+    console.log("Online :-)")
+});
+
 /***/ })
 /******/ ]);

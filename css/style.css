@@ -67,16 +67,17 @@ button:hover {
     margin-bottom: 3px;
 }
 
-@media (min-width: 500px) {
-
+@media (min-width: 560px) {
+    #cy {
+        margin-left: -250px;
+        left: 50%;
+    }
 }
 
 #cy {
-    width: 500px;
-    height: 500px;
+    width: 550px;
+    height: 450px;
     border: 1px #ff976e solid;
-    margin-left: -250px;
-    left: 50%;
 }
 
 #btnDiscardAddingEdge {
