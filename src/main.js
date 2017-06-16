@@ -231,7 +231,7 @@ function doSimulationStep() {
     if (selectedEdge === null) {
         console.log("Error - no out edge found");
         let txvError = $('#errorText');
-        txvError.text("DFA simulation fail. No out edge found - did you forgot some transition?");
+        txvError.text("DFA simulation fail. No out edge found - did you forget some transition?");
         txvError.css("display", "inline");
         stopSimulation();
         return;
