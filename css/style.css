@@ -74,12 +74,6 @@ button:hover {
     }
 }
 
-@media (max-width: 700px) {
-    #github-banner {
-        display: none;
-    }
-}
-
 #cy {
     width: 550px;
     height: 450px;
